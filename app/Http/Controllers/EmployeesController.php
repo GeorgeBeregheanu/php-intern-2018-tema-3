@@ -36,4 +36,24 @@ class EmployeesController extends Controller
 
         return json_encode($employees);
     }
+
+    public function createEmployee(Request $request)
+    {
+        $employee = Employee::create($request->all());
+
+        return json_encode($employee);
+    }
+
+    public function deleteEmployee($id)
+    {
+        $employee = Employee::destroy($id);
+        return response('Employee deleted Successfully', 200);
+    }
+
+    public function patchEmployee(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+        $employee->update($request->all());
+        return json_encode($employee);
+    }
 }

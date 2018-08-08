@@ -22,9 +22,14 @@ $router->get('/keygen', function() {
 
 $router->get('/companies', 'CompaniesController@showAllCompanies');
 $router->get('/companies/{id}', 'CompaniesController@getCompanyById');
-
-$router->get('/companies/types/{type}', 'CompaniesController@getCompanyByType');
+$router->get('/companies?type={type}', 'CompaniesController@getCompanyByType');
+$router->post('/companies', 'CompaniesController@createCompany');
+$router->delete('companies/delete/{id}','CompaniesController@deleteCompany');
+$router->patch('companies/update/{id}','CompaniesController@patchCompany');
 
 $router->get('/employees','EmployeesController@showAllEmployees');
 $router->get('/employees/{id}', 'EmployeesController@showEmployeeById');
 $router->get('/employees?job={job}', 'EmployeesController@showEmployeeByJob');
+$router->post('/employees', 'EmployeesController@createEmployee');
+$router->delete('employees/delete/{id}','EmployeesController@deleteEmployee');
+$router->patch('employees/update/{id}','EmployeesController@patchEmployee');

@@ -12,7 +12,7 @@ class Company extends Model {
      * @var array
      */
     protected $fillable = [
-        
+        'type','name'
     ];
 
     /**
@@ -23,47 +23,8 @@ class Company extends Model {
     protected $hidden = [
 
     ];
-
-    public static function getAll(){
-        $companies = [ 'companies' =>
-            [
-                [
-                    'type'=> 'market',
-                    'name'=> 'Kaufland',
-                ],
-                [
-                    'type'=> 'market',
-                    'name'=> 'Lidl',
-                ],
-                [
-                    'type'=> 'market',
-                    'name'=> 'Bila',
-                ]
-            ]
-        ];
-
-        return $companies;
+    function employees(){
+        return $this->hasMany('App\Employee', 'company_id', 'id');
     }
 
-    public static function getById($id){
-        $companies = [
-            'companies' =>
-            [
-                [
-                    'type'=> 'market',
-                    'name'=> 'Kaufland',
-                ],
-                [
-                    'type'=> 'market',
-                    'name'=> 'Lidl',
-                ],
-                [
-                    'type'=> 'market',
-                    'name'=> 'Bila',
-                ]
-            ]
-        ];
-
-        return $companies['companies'][$id];
-    }
 }

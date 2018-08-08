@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
 {
@@ -27,18 +28,35 @@ class CompaniesController extends Controller
     }
 
     public function getCompanyById($id){
-        // $company = Company::getById($id);
 
         $company = Company::find($id);
 
-
-        // return json_encode($company);
     }
 
     public function getCompanyByType($type){
-        echo 2;
+
         $companies = Company::where('type',$type)->get();
 
-        // return json_encode($companies);
+        return json_encode($companies);
+    }
+
+    public function createCompany(Request $request)
+    {
+        $company = Company::create($request->all());
+
+        return json_encode($company);
+    }
+
+    public function deleteCompany($id)
+    {
+        $company = Company::destroy($id);
+        return response('Company deleted Successfully', 200);
+    }
+
+    public function patchCompany(Request $request, $id)
+    {
+        $company = Company::find($id);
+        $company->update($request->all());
+        return json_encode($company);
     }
 }
